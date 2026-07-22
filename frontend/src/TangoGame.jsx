@@ -344,10 +344,10 @@ export default function GameUI() {
             ?
           </button>
 
-          {/* Tooltip Box (Mobile Tap & Clickable) */}
+          {/* Tooltip Box (Mobile Tap & Clickable, Anchored to right-0) */}
           {showModeGuide && (
             <div 
-              className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-slate-800 text-slate-100 text-xs rounded-lg p-3 shadow-xl z-50 animate-in fade-in zoom-in duration-150"
+              className="absolute top-full right-0 mt-2 w-64 max-w-[calc(100vw-2rem)] bg-slate-800 text-slate-100 text-xs rounded-lg p-3 shadow-xl z-50 animate-in fade-in zoom-in duration-150"
               onClick={() => setShowModeGuide(false)}
             >
               <div className="flex items-center justify-between border-b border-slate-700 pb-1 mb-1">
@@ -362,8 +362,8 @@ export default function GameUI() {
                   <span className="text-emerald-400 font-bold">EXPERT:</span> Mode analisis kinerja. Menampilkan metrik evaluasi (waktu & iterasi) serta membandingkan solver Backtracking vs Simulated Annealing.
                 </p>
               </div>
-              {/* Segitiga panah tooltip pointing up */}
-              <div className="absolute bottom-full left-1/2 -translate-x-1/2 border-4 border-transparent border-b-slate-800"></div>
+              {/* Segitiga panah tooltip pointing up (Di kanan atas menunjuk ke tombol ?) */}
+              <div className="absolute bottom-full right-1.5 border-4 border-transparent border-b-slate-800"></div>
             </div>
           )}
         </div>

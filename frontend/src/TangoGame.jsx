@@ -11,7 +11,7 @@ function Cell({ value, isGiven, isViolating, onClick }) {
     content = "🌑";
   }
 
-  let className = "w-14 h-14 border-2 flex items-center justify-center text-2xl cursor-pointer transition-all select-none ";
+  let className = "w-11 h-11 sm:w-14 sm:h-14 border-2 flex items-center justify-center text-xl sm:text-2xl cursor-pointer transition-all select-none ";
   
   // logika warna border (Garis Tepi)
   if (isViolating) {
@@ -294,14 +294,14 @@ export default function GameUI() {
   function renderRelation(c, index) {
     const r1 = c.cells[0][0]; const c1 = c.cells[0][1];
     const r2 = c.cells[1][0]; const c2 = c.cells[1][1];
-    //56 itu panjang kotak plus 4 jarak gap = 60 , 36 posisi titik tengah kotak pertama kiri atas
-    const top = 36 + ((r1 + r2) / 2) * 60;
-    const left = 36 + ((c1 + c2) / 2) * 60;
+    // Posisi persentase relatif terhadap 6x6 grid (100% responsif di semua ukuran layar)
+    const topPercent = (((r1 + r2) / 2 + 0.5) / 6) * 100;
+    const leftPercent = (((c1 + c2) / 2 + 0.5) / 6) * 100;
     let warnaTeks = c.relationValue === "x" ? "text-red-500" : "text-blue-600";
     return (
-      <div key={"const-" + index} className="absolute z-10 pointer-events-none transform -translate-x-1/2 -translate-y-1/2 select-none" style={{ top: top + "px", left: left + "px" }}>
-        <div className="w-6 h-6 bg-white rounded-full border border-gray-200 shadow-md flex items-center justify-center">
-          <span className={"text-xs font-bold " + warnaTeks}>{c.relationValue}</span>
+      <div key={"const-" + index} className="absolute z-10 pointer-events-none transform -translate-x-1/2 -translate-y-1/2 select-none" style={{ top: `${topPercent}%`, left: `${leftPercent}%` }}>
+        <div className="w-5 h-5 sm:w-6 sm:h-6 bg-white rounded-full border border-gray-300 shadow-md flex items-center justify-center">
+          <span className={"text-[10px] sm:text-xs font-bold " + warnaTeks}>{c.relationValue}</span>
         </div>
       </div>
     );
@@ -313,9 +313,9 @@ export default function GameUI() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen w-screen bg-slate-50 font-sans text-slate-900 select-none overflow-hidden">
-      <div className="mb-4 text-center flex flex-col items-center">
-        <h1 className="text-3xl font-black tracking-tight mb-1">TANGO GAME</h1>
+    <div className="min-h-screen w-full bg-slate-50 font-sans text-slate-900 select-none py-6 px-4 flex flex-col items-center justify-start sm:justify-center overflow-y-auto">
+      <div className="mb-3 text-center flex flex-col items-center">
+        <h1 className="text-2xl sm:text-3xl font-black tracking-tight mb-1">TANGO GAME</h1>
         
         {/* Tombol Cara Bermain */}
         <button 
@@ -325,12 +325,12 @@ export default function GameUI() {
           <span>📖</span> Cara Bermain
         </button>
 
-        <div className="bg-slate-800 text-white px-4 py-1 rounded text-xs uppercase tracking-widest">{statusBar}</div>
+        <div className="bg-slate-800 text-white px-3 sm:px-4 py-1 rounded text-[11px] sm:text-xs uppercase tracking-widest">{statusBar}</div>
       </div>
-      <div className="flex items-center gap-2 mb-6">
+      <div className="flex items-center gap-2 mb-4">
         <div className="flex gap-2 bg-slate-200 p-1 rounded-lg">
-          <button onClick={() => setMode("user")} className={"px-4 py-1 rounded-md text-sm font-bold " + (mode === "user" ? "bg-white shadow" : "")}>USER</button>
-          <button onClick={() => setMode("expert")} className={"px-4 py-1 rounded-md text-sm font-bold " + (mode === "expert" ? "bg-white shadow" : "")}>EXPERT</button>
+          <button onClick={() => setMode("user")} className={"px-4 py-1 rounded-md text-xs sm:text-sm font-bold " + (mode === "user" ? "bg-white shadow" : "")}>USER</button>
+          <button onClick={() => setMode("expert")} className={"px-4 py-1 rounded-md text-xs sm:text-sm font-bold " + (mode === "expert" ? "bg-white shadow" : "")}>EXPERT</button>
         </div>
 
         {/* Petunjuk Mode */}
@@ -354,8 +354,8 @@ export default function GameUI() {
           </div>
         </div>
       </div>
-      <div className="relative bg-slate-300 p-2 rounded-lg shadow-xl border-4 border-slate-800">
-        <div className="grid grid-cols-6 gap-1">
+      <div className="relative bg-slate-300 p-2 rounded-xl shadow-xl border-4 border-slate-800 max-w-full">
+        <div className="grid grid-cols-6 gap-1 relative">
           {/* untuk setiap baris, dan untuk setiap kolom */}
           {grid.map((row, rIdx) => row.map((val, cIdx) => {
             let isGiven = false;
@@ -368,13 +368,14 @@ export default function GameUI() {
             }
             return <Cell key={rIdx+"-"+cIdx} value={val} isGiven={isGiven} isViolating={isViolating} onClick={() => updateCell(rIdx, cIdx)} />;
           }))}
-        </div>
-        {/* render simbol relasi */}
-        <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-          {constraints.map((c, i) => renderRelation(c, i))}
+
+          {/* render simbol relasi */}
+          <div className="absolute inset-0 pointer-events-none">
+            {constraints.map((c, i) => renderRelation(c, i))}
+          </div>
         </div>
       </div>
-      <div className="mt-6 flex flex-col gap-4 w-full max-w-sm">
+      <div className="mt-4 sm:mt-6 flex flex-col gap-3 sm:gap-4 w-full max-w-sm">
         
         {/* Kontrol Checkbox (Highlight & Heuristic), Heuristic kalau di mode expert */}
         <div className="flex items-center justify-center gap-4 mb-1">
@@ -393,22 +394,22 @@ export default function GameUI() {
 
         {/* kalau user cuman ada tombol solve, expert ada dua */}       
         {mode === "user" ? (
-          <button onClick={() => onSolveRequest("backtracking")} disabled={loading} className="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-all shadow-[0_4px_0_0_rgba(29,78,216,1)] active:shadow-none active:translate-y-1">
+          <button onClick={() => onSolveRequest("backtracking")} disabled={loading} className="w-full bg-blue-600 text-white font-bold py-2.5 sm:py-3 rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-all shadow-[0_4px_0_0_rgba(29,78,216,1)] active:shadow-none active:translate-y-1 text-sm sm:text-base">
             {loading ? "MENGHITUNG..." : "SOLVE PUZZLE"}
           </button>
         ) : (
           <div className="grid grid-cols-2 gap-3">
-            <button onClick={() => onSolveRequest("backtracking")} disabled={loading} className="bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-all shadow-[0_4px_0_0_rgba(29,78,216,1)] active:shadow-none active:translate-y-1">
+            <button onClick={() => onSolveRequest("backtracking")} disabled={loading} className="bg-blue-600 text-white font-bold py-2.5 sm:py-3 rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-all shadow-[0_4px_0_0_rgba(29,78,216,1)] active:shadow-none active:translate-y-1 text-xs sm:text-sm">
               {loading ? "..." : "SOLVE: BT"}
             </button>
-            <button onClick={() => onSolveRequest("sa")} disabled={loading} className="bg-emerald-600 text-white font-bold py-3 rounded-lg hover:bg-emerald-700 disabled:opacity-50 transition-all shadow-[0_4px_0_0_rgba(5,150,105,1)] active:shadow-none active:translate-y-1">
+            <button onClick={() => onSolveRequest("sa")} disabled={loading} className="bg-emerald-600 text-white font-bold py-2.5 sm:py-3 rounded-lg hover:bg-emerald-700 disabled:opacity-50 transition-all shadow-[0_4px_0_0_rgba(5,150,105,1)] active:shadow-none active:translate-y-1 text-xs sm:text-sm">
               {loading ? "..." : "SOLVE: SA"}
             </button>
           </div>
         )}
-        <div className="flex gap-2">
+        <div className="grid grid-cols-3 gap-2">
           {/* Dropdown Difficulty tetap ada di kedua mode */}
-          <select value={selectedDifficulty} onChange={handleDifficultyChange} className="flex-1 bg-white border-2 border-slate-800 px-2 py-2 rounded-lg font-bold text-xs outline-none cursor-pointer">
+          <select value={selectedDifficulty} onChange={handleDifficultyChange} className="bg-white border-2 border-slate-800 px-2 py-2 rounded-lg font-bold text-xs outline-none cursor-pointer text-center">
             <option value="easy">EASY</option>
             <option value="medium">MEDIUM</option>
             <option value="hard">HARD</option>
@@ -418,17 +419,17 @@ export default function GameUI() {
           {mode === "user" ? (
             <button 
               onClick={handleRandomPuzzle}
-              className="flex-[1.5] bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-2 py-2 rounded-lg text-[10px] transition-all shadow-[0_4px_0_0_rgba(67,56,202,1)] active:shadow-none active:translate-y-1"
+              className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-2 py-2 rounded-lg text-xs transition-all shadow-[0_4px_0_0_rgba(67,56,202,1)] active:shadow-none active:translate-y-1 truncate"
             >
               NEW PUZZLE
             </button>
           ) : (
-            <select value={selectedPuzzleNumber} onChange={handlePuzzleNumberChange} className="flex-1 bg-white border-2 border-slate-800 px-2 py-2 rounded-lg font-bold text-xs outline-none cursor-pointer">
+            <select value={selectedPuzzleNumber} onChange={handlePuzzleNumberChange} className="bg-white border-2 border-slate-800 px-2 py-2 rounded-lg font-bold text-xs outline-none cursor-pointer text-center">
               {puzzleNumbers}
             </select>
           )}
 
-          <button onClick={resetBoard} className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-bold px-4 py-2 rounded-lg text-xs transition-all shadow-[0_4px_0_0_rgba(194,65,12,1)] active:shadow-none active:translate-y-1">RESET</button>
+          <button onClick={resetBoard} className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-2 py-2 rounded-lg text-xs transition-all shadow-[0_4px_0_0_rgba(194,65,12,1)] active:shadow-none active:translate-y-1 truncate">RESET</button>
         </div>
       </div>
       {mode === "expert" && evaluationMetrics && (

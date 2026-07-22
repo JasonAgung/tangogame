@@ -67,6 +67,9 @@ export default function GameUI() {
   const [selectedDifficulty, setSelectedDifficulty] = useState("easy");
   const [selectedPuzzleNumber, setSelectedPuzzleNumber] = useState("1");
 
+  // State Modal Cara Bermain
+  const [showRulesModal, setShowRulesModal] = useState(false);
+
   useEffect(function() {
     start();
   }, []);
@@ -311,8 +314,17 @@ export default function GameUI() {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen w-screen bg-slate-50 font-sans text-slate-900 select-none overflow-hidden">
-      <div className="mb-4 text-center">
-        <h1 className="text-3xl font-black tracking-tight mb-1">TANGO SOLVER</h1>
+      <div className="mb-4 text-center flex flex-col items-center">
+        <h1 className="text-3xl font-black tracking-tight mb-1">TANGO GAME</h1>
+        
+        {/* Tombol Cara Bermain */}
+        <button 
+          onClick={() => setShowRulesModal(true)}
+          className="mb-2 bg-white hover:bg-slate-100 border border-slate-300 text-slate-700 font-bold px-3 py-1 rounded-full text-xs transition-all shadow-sm flex items-center gap-1.5 cursor-pointer active:scale-95"
+        >
+          <span>📖</span> Cara Bermain
+        </button>
+
         <div className="bg-slate-800 text-white px-4 py-1 rounded text-xs uppercase tracking-widest">{statusBar}</div>
       </div>
       <div className="flex items-center gap-2 mb-6">
@@ -430,18 +442,76 @@ export default function GameUI() {
         </div>
       )}
 
-      {/* Notice sumber data */}
-      <div className="mt-4 text-[10px] text-slate-400 text-center select-text">
-        Sumber data puzzle:{" "}
-        <a 
-          href="https://www.tangounlimitedgame.com/" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="underline hover:text-slate-500 transition-colors font-semibold"
-        >
-          tangounlimitedgame.com
-        </a>
+      {/* Notice sumber data & credit */}
+      <div className="mt-4 text-[10px] text-slate-400 text-center select-text space-y-1">
+        <div>
+          Sumber data puzzle:{" "}
+          <a 
+            href="https://www.tangounlimitedgame.com/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="underline hover:text-slate-500 transition-colors font-semibold"
+          >
+            tangounlimitedgame.com
+          </a>
+        </div>
+        <div className="font-medium text-slate-500">
+          Made by <span className="font-semibold text-slate-700">Jason Kelvin Agung</span>
+        </div>
       </div>
+
+      {/* Modal Cara Bermain / Game Rules */}
+      {showRulesModal && (
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white border-2 border-slate-800 rounded-xl p-5 max-w-md w-full shadow-2xl space-y-4 relative text-left animate-in fade-in zoom-in duration-200">
+            {/* Header Modal */}
+            <div className="border-b pb-2">
+              <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
+                <span>📖</span> Cara Bermain Tango Puzzle
+              </h3>
+            </div>
+
+            {/* Isi Aturan */}
+            <div className="space-y-3 text-xs text-slate-600 leading-relaxed max-h-[60vh] overflow-y-auto pr-1">
+              <div className="p-2.5 bg-slate-50 border rounded-lg space-y-1">
+                <p className="font-bold text-slate-800 flex items-center gap-1.5">
+                  <span>1️⃣</span> Keseimbangan Simbol (3☀️ & 3🌑)
+                </p>
+                <p>Setiap baris dan kolom pada papan 6x6 harus berisi <b>tepat 3 Matahari (☀️)</b> dan <b>3 Bulan (🌑)</b>.</p>
+              </div>
+
+              <div className="p-2.5 bg-slate-50 border rounded-lg space-y-1">
+                <p className="font-bold text-slate-800 flex items-center gap-1.5">
+                  <span>2️⃣</span> Maksimal 2 Simbol Berurutan
+                </p>
+                <p>Dilarang menempatkan 3 simbol yang sama secara berturut-turut dalam satu baris atau kolom (misal: ☀️☀️☀️ atau 🌑🌑🌑 itu <b>salah</b>).</p>
+              </div>
+
+              <div className="p-2.5 bg-slate-50 border rounded-lg space-y-1">
+                <p className="font-bold text-slate-800 flex items-center gap-1.5">
+                  <span>3️⃣</span> Simbol Relasi Petunjuk
+                </p>
+                <ul className="list-disc list-inside space-y-1 pl-1">
+                  <li><span className="font-bold text-blue-600 border px-1.5 py-0.5 rounded bg-blue-50 text-[11px]">=</span> : Dua petak bersebelahan harus ber-simbol <b>SAMA</b>.</li>
+                  <li><span className="font-bold text-red-500 border px-1.5 py-0.5 rounded bg-red-50 text-[11px]">x</span> : Dua petak bersebelahan harus ber-simbol <b>BERBEDA</b>.</li>
+                </ul>
+              </div>
+
+              <div className="p-2.5 bg-amber-50 border border-amber-200 text-amber-800 rounded-lg text-[11px]">
+                💡 <b>Tips:</b> Aktifkan opsi <i>Highlight Violations</i> di bawah papan untuk langsung melihat petak mana yang melanggar aturan.
+              </div>
+            </div>
+
+            {/* Footer Modal / Tombol Tutup */}
+            <button 
+              onClick={() => setShowRulesModal(false)}
+              className="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-2.5 rounded-lg text-xs transition-all shadow-md active:translate-y-0.5 cursor-pointer"
+            >
+              Mengerti & Mulai Bermain
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

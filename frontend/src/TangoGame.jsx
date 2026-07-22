@@ -67,8 +67,9 @@ export default function GameUI() {
   const [selectedDifficulty, setSelectedDifficulty] = useState("easy");
   const [selectedPuzzleNumber, setSelectedPuzzleNumber] = useState("1");
 
-  // State Modal Cara Bermain
+  // State Modal & Guide
   const [showRulesModal, setShowRulesModal] = useState(false);
+  const [showModeGuide, setShowModeGuide] = useState(false);
 
   useEffect(function() {
     start();
@@ -334,24 +335,37 @@ export default function GameUI() {
         </div>
 
         {/* Petunjuk Mode */}
-        <div className="relative group cursor-help flex items-center justify-center">
-          <div className="w-5 h-5 rounded-full border border-slate-400 text-slate-500 hover:border-slate-600 hover:text-slate-700 hover:bg-slate-100 flex items-center justify-center text-xs font-bold transition-all select-none">
+        <div className="relative flex items-center justify-center">
+          <button 
+            onClick={() => setShowModeGuide(!showModeGuide)}
+            className="w-5 h-5 rounded-full border border-slate-400 text-slate-500 hover:border-slate-600 hover:text-slate-700 hover:bg-slate-100 flex items-center justify-center text-xs font-bold transition-all select-none cursor-pointer active:scale-90"
+            title="Panduan Mode"
+          >
             ?
-          </div>
-          {/* Tooltip Box */}
-          <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-slate-800 text-slate-100 text-xs rounded-lg p-3 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 pointer-events-none">
-            <p className="font-bold border-b border-slate-700 pb-1 mb-1 text-white">Panduan Mode</p>
-            <div className="space-y-1.5 text-[11px] leading-relaxed">
-              <p>
-                <span className="text-blue-400 font-bold">USER:</span> Mode interaktif bermain puzzle. Hanya terdapat opsi penyelesaian otomatis menggunakan Backtracking.
-              </p>
-              <p>
-                <span className="text-emerald-400 font-bold">EXPERT:</span> Mode analisis kinerja. Menampilkan metrik evaluasi (waktu & iterasi) serta membandingkan solver Backtracking vs Simulated Annealing.
-              </p>
+          </button>
+
+          {/* Tooltip Box (Mobile Tap & Clickable) */}
+          {showModeGuide && (
+            <div 
+              className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-slate-800 text-slate-100 text-xs rounded-lg p-3 shadow-xl z-50 animate-in fade-in zoom-in duration-150"
+              onClick={() => setShowModeGuide(false)}
+            >
+              <div className="flex items-center justify-between border-b border-slate-700 pb-1 mb-1">
+                <p className="font-bold text-white">Panduan Mode</p>
+                <span className="text-[10px] text-slate-400 cursor-pointer">✕</span>
+              </div>
+              <div className="space-y-1.5 text-[11px] leading-relaxed">
+                <p>
+                  <span className="text-blue-400 font-bold">USER:</span> Mode interaktif bermain puzzle. Hanya terdapat opsi penyelesaian otomatis menggunakan Backtracking.
+                </p>
+                <p>
+                  <span className="text-emerald-400 font-bold">EXPERT:</span> Mode analisis kinerja. Menampilkan metrik evaluasi (waktu & iterasi) serta membandingkan solver Backtracking vs Simulated Annealing.
+                </p>
+              </div>
+              {/* Segitiga panah tooltip pointing up */}
+              <div className="absolute bottom-full left-1/2 -translate-x-1/2 border-4 border-transparent border-b-slate-800"></div>
             </div>
-            {/* Segitiga panah tooltip pointing up */}
-            <div className="absolute bottom-full left-1/2 -translate-x-1/2 border-4 border-transparent border-b-slate-800"></div>
-          </div>
+          )}
         </div>
       </div>
       <div className="relative bg-slate-300 p-2 rounded-xl shadow-xl border-4 border-slate-800 max-w-full">

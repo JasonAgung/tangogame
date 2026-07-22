@@ -1,0 +1,242 @@
+{
+  "constraints": [
+    {
+      "cells": [
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ]
+      ],
+      "relationValue": "x",
+      "type": "relation"
+    },
+    {
+      "cells": [
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          5
+        ]
+      ],
+      "relationValue": "=",
+      "type": "relation"
+    },
+    {
+      "cells": [
+        [
+          3,
+          0
+        ],
+        [
+          4,
+          0
+        ]
+      ],
+      "relationValue": "x",
+      "type": "relation"
+    },
+    {
+      "cells": [
+        [
+          3,
+          2
+        ],
+        [
+          4,
+          2
+        ]
+      ],
+      "relationValue": "x",
+      "type": "relation"
+    },
+    {
+      "cells": [
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          2
+        ]
+      ],
+      "relationValue": "=",
+      "type": "relation"
+    },
+    {
+      "cells": [
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "relationValue": "=",
+      "type": "relation"
+    },
+    {
+      "cells": [
+        [
+          5,
+          0
+        ],
+        [
+          5,
+          1
+        ]
+      ],
+      "relationValue": "=",
+      "type": "relation"
+    }
+  ],
+  "givens": [
+    [
+      0,
+      3
+    ],
+    [
+      0,
+      4
+    ],
+    [
+      0,
+      5
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      4
+    ],
+    [
+      1,
+      5
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      2,
+      2
+    ],
+    [
+      2,
+      5
+    ],
+    [
+      3,
+      3
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      4,
+      0
+    ],
+    [
+      4,
+      3
+    ],
+    [
+      4,
+      4
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      5,
+      0
+    ],
+    [
+      5,
+      1
+    ],
+    [
+      5,
+      2
+    ],
+    [
+      5,
+      3
+    ],
+    [
+      5,
+      4
+    ],
+    [
+      5,
+      5
+    ]
+  ],
+  "grid": [
+    [
+      null,
+      null,
+      null,
+      "S",
+      "M",
+      "M"
+    ],
+    [
+      "M",
+      null,
+      "S",
+      null,
+      "M",
+      "S"
+    ],
+    [
+      null,
+      "S",
+      "M",
+      null,
+      null,
+      "M"
+    ],
+    [
+      null,
+      null,
+      null,
+      "S",
+      "S",
+      null
+    ],
+    [
+      "M",
+      null,
+      null,
+      "M",
+      "M",
+      "S"
+    ],
+    [
+      "M",
+      "M",
+      "S",
+      "M",
+      "S",
+      "S"
+    ]
+  ]
+}

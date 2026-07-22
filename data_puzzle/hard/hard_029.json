@@ -1,0 +1,190 @@
+{
+  "constraints": [
+    {
+      "cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "relationValue": "=",
+      "type": "relation"
+    },
+    {
+      "cells": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "relationValue": "x",
+      "type": "relation"
+    },
+    {
+      "cells": [
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          5
+        ]
+      ],
+      "relationValue": "x",
+      "type": "relation"
+    },
+    {
+      "cells": [
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "relationValue": "x",
+      "type": "relation"
+    },
+    {
+      "cells": [
+        [
+          3,
+          0
+        ],
+        [
+          3,
+          1
+        ]
+      ],
+      "relationValue": "x",
+      "type": "relation"
+    },
+    {
+      "cells": [
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "relationValue": "=",
+      "type": "relation"
+    },
+    {
+      "cells": [
+        [
+          5,
+          2
+        ],
+        [
+          5,
+          3
+        ]
+      ],
+      "relationValue": "x",
+      "type": "relation"
+    }
+  ],
+  "givens": [
+    [
+      0,
+      4
+    ],
+    [
+      1,
+      4
+    ],
+    [
+      2,
+      0
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      2,
+      4
+    ],
+    [
+      2,
+      5
+    ],
+    [
+      3,
+      2
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      5,
+      1
+    ]
+  ],
+  "grid": [
+    [
+      null,
+      null,
+      null,
+      null,
+      "S",
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      "S",
+      null
+    ],
+    [
+      "S",
+      null,
+      null,
+      "M",
+      "M",
+      "S"
+    ],
+    [
+      null,
+      null,
+      "S",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      "M"
+    ],
+    [
+      null,
+      "M",
+      null,
+      null,
+      null,
+      null
+    ]
+  ]
+}

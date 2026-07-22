@@ -1,0 +1,162 @@
+{
+  "constraints": [
+    {
+      "cells": [
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "relationValue": "=",
+      "type": "relation"
+    },
+    {
+      "cells": [
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ]
+      ],
+      "relationValue": "x",
+      "type": "relation"
+    },
+    {
+      "cells": [
+        [
+          3,
+          2
+        ],
+        [
+          3,
+          3
+        ]
+      ],
+      "relationValue": "x",
+      "type": "relation"
+    },
+    {
+      "cells": [
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "relationValue": "x",
+      "type": "relation"
+    },
+    {
+      "cells": [
+        [
+          5,
+          3
+        ],
+        [
+          5,
+          4
+        ]
+      ],
+      "relationValue": "x",
+      "type": "relation"
+    }
+  ],
+  "givens": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      0,
+      5
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      2,
+      5
+    ],
+    [
+      3,
+      3
+    ],
+    [
+      4,
+      1
+    ],
+    [
+      5,
+      3
+    ],
+    [
+      5,
+      5
+    ]
+  ],
+  "grid": [
+    [
+      null,
+      "M",
+      "S",
+      null,
+      null,
+      "M"
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      "M",
+      null,
+      null,
+      null,
+      "S"
+    ],
+    [
+      null,
+      null,
+      null,
+      "M",
+      null,
+      null
+    ],
+    [
+      null,
+      "S",
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      "M",
+      null,
+      "S"
+    ]
+  ]
+}

@@ -1,0 +1,186 @@
+{
+  "constraints": [
+    {
+      "cells": [
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ]
+      ],
+      "relationValue": "=",
+      "type": "relation"
+    },
+    {
+      "cells": [
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          5
+        ]
+      ],
+      "relationValue": "=",
+      "type": "relation"
+    },
+    {
+      "cells": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ]
+      ],
+      "relationValue": "=",
+      "type": "relation"
+    },
+    {
+      "cells": [
+        [
+          4,
+          2
+        ],
+        [
+          4,
+          3
+        ]
+      ],
+      "relationValue": "=",
+      "type": "relation"
+    },
+    {
+      "cells": [
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          5
+        ]
+      ],
+      "relationValue": "x",
+      "type": "relation"
+    }
+  ],
+  "givens": [
+    [
+      0,
+      4
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      5
+    ],
+    [
+      2,
+      0
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      3
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      4,
+      2
+    ],
+    [
+      4,
+      4
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      5,
+      1
+    ],
+    [
+      5,
+      2
+    ],
+    [
+      5,
+      3
+    ]
+  ],
+  "grid": [
+    [
+      null,
+      null,
+      null,
+      null,
+      "S",
+      null
+    ],
+    [
+      "S",
+      "M",
+      null,
+      null,
+      null,
+      "M"
+    ],
+    [
+      "M",
+      "M",
+      null,
+      "S",
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      "M",
+      "M",
+      null
+    ],
+    [
+      null,
+      null,
+      "M",
+      null,
+      "S",
+      "M"
+    ],
+    [
+      null,
+      "M",
+      "S",
+      "S",
+      null,
+      null
+    ]
+  ]
+}

@@ -1,0 +1,176 @@
+{
+  "constraints": [
+    {
+      "cells": [
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ]
+      ],
+      "relationValue": "x",
+      "type": "relation"
+    },
+    {
+      "cells": [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "relationValue": "=",
+      "type": "relation"
+    },
+    {
+      "cells": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "relationValue": "x",
+      "type": "relation"
+    },
+    {
+      "cells": [
+        [
+          3,
+          0
+        ],
+        [
+          3,
+          1
+        ]
+      ],
+      "relationValue": "x",
+      "type": "relation"
+    },
+    {
+      "cells": [
+        [
+          3,
+          2
+        ],
+        [
+          3,
+          3
+        ]
+      ],
+      "relationValue": "x",
+      "type": "relation"
+    },
+    {
+      "cells": [
+        [
+          4,
+          1
+        ],
+        [
+          5,
+          1
+        ]
+      ],
+      "relationValue": "=",
+      "type": "relation"
+    }
+  ],
+  "givens": [
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      0
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      2,
+      4
+    ],
+    [
+      3,
+      2
+    ],
+    [
+      3,
+      3
+    ],
+    [
+      4,
+      2
+    ],
+    [
+      5,
+      0
+    ]
+  ],
+  "grid": [
+    [
+      null,
+      "S",
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      "M",
+      null,
+      null,
+      null
+    ],
+    [
+      "S",
+      null,
+      null,
+      "S",
+      "S",
+      null
+    ],
+    [
+      null,
+      null,
+      "S",
+      "M",
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      "S",
+      null,
+      null,
+      null
+    ],
+    [
+      "S",
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  ]
+}

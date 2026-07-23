@@ -461,14 +461,10 @@ export default function GameUI() {
       <div className="mt-4 text-[10px] text-slate-400 text-center select-text space-y-1">
         <div>
           Sumber data puzzle:{" "}
-          <a 
-            href="https://www.tangounlimitedgame.com/" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="underline hover:text-slate-500 transition-colors font-semibold"
-          >
+          <span className="font-semibold">
             tangounlimitedgame.com
-          </a>
+          </span>{" "}
+          <span className="italic text-slate-400">(inactive)</span>
         </div>
         <div className="font-medium text-slate-500">
           Made by <span className="font-semibold text-slate-700">Jason Kelvin Agung</span>

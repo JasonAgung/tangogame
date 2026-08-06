@@ -23,7 +23,7 @@ Project ini mendukung penyelesaian puzzle secara otomatis menggunakan dua pendek
 
 ---
 
-## 📂 Struktur Project
+## Struktur Project
 
 ```text
 tango-project/
@@ -100,7 +100,7 @@ Buka alamat yang muncul di terminal (biasanya `http://localhost:5173`) di browse
 
 ---
 
-## ☁️ Deployment
+## Deployment
 
 - **Backend**: Di-deploy ke [Render.com](https://render.com) (Python 3 Web Service via Uvicorn).
 - **Frontend**: Di-deploy ke [Vercel](https://vercel.com) (Vite Frontend + Environment Variable `VITE_API_BASE_URL`).

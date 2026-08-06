@@ -8,7 +8,7 @@ Project ini mendukung penyelesaian puzzle secara otomatis menggunakan dua pendek
 
 ---
 
-## 🌟 Fitur Utama
+## Fitur Utama
 
 - **Mode USER (Interaktif)**:
   - Bermain puzzle secara manual (klik petak untuk mengubah menjadi ☀️ Sun / 🌑 Moon).
@@ -49,7 +49,7 @@ tango-project/
 
 ---
 
-## 💻 Cara Menjalankan Project (Lokal)
+## Cara Menjalankan Project (Lokal)
 
 ### 1. Jalankan Backend (API)
 
@@ -107,7 +107,7 @@ Buka alamat yang muncul di terminal (biasanya `http://localhost:5173`) di browse
 
 ---
 
-## 👤 Author & Credits
+## Author & Credits
 
 - **Developer**: Jason Kelvin Agung
 - **Sumber Data Puzzle**: `tangounlimitedgame.com` *(inactive)*

@@ -29,6 +29,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DAILY_DIR = os.path.join(BASE_DIR, "data_puzzle", "daily")
 LATEST_PATH = os.path.join(DAILY_DIR, "latest.json")
 
+# label kesulitan ikut bahasa halaman (LinkedIn pakai bahasa sesuai IP, VPS Batam -> Indonesia)
+DIFFICULTY_RE = re.compile(r'"(?:Difficulty|Kesulitan) (\w+)"')
+DIFFICULTY_MAP = {"easy": "easy", "mudah": "easy", "medium": "medium", "sedang": "medium",
+                  "hard": "hard", "sulit": "hard"}
+
 # puzzle LinkedIn ganti tiap tengah malam waktu Pacific
 RESET_TZ = ZoneInfo("America/Los_Angeles")
 
@@ -41,7 +46,8 @@ def fetch_raw_response(timeout_s: int = 45) -> str:
     with sync_playwright() as pw:
         browser = pw.chromium.launch(headless=True, channel=channel)
         try:
-            context = browser.new_context(locale="en-US", viewport={"width": 1280, "height": 1000})
+            context = browser.new_context(locale="en-US", viewport={"width": 1280, "height": 1000},
+                                          extra_http_headers={"Accept-Language": "en-US,en;q=0.9"})
             page = context.new_page()
 
             responses = []
@@ -88,11 +94,11 @@ def parse_lotka(body: str) -> dict:
     raw, _ = json.JSONDecoder().raw_decode(body, idx + len(PUZZLE_KEY))
 
     edition = re.search(r'"todaysGameEditionText":"(\d+)"', body)
-    difficulty = re.search(r'"Difficulty (\w+)"', body)
+    difficulty = DIFFICULTY_RE.search(body)
     return {
         "raw": raw,
         "edition": int(edition.group(1)) if edition else None,
-        "difficulty": difficulty.group(1).lower() if difficulty else None,
+        "difficulty": DIFFICULTY_MAP.get(difficulty.group(1).lower(), difficulty.group(1).lower()) if difficulty else None,
     }
 
 

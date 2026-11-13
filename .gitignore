@@ -32,3 +32,6 @@ results_overall/
 temporary/
 test_results_*/
 SA_RESEARCH_CONCLUSIONS.md
+
+# Puzzle harian hasil scraper (dibuat di server)
+data_puzzle/daily/

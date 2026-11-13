@@ -43,6 +43,21 @@ def get_puzzle(difficulty: str, number: int):
         data = json.load(f)
     return data
 
+@app.get("/api/daily")
+def get_daily_puzzle():
+    # diisi oleh app/linkedin_daily.py (systemd timer), di sini cuma baca file
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    file_path = os.path.join(base_dir, "data_puzzle", "daily", "latest.json")
+
+    if not os.path.exists(file_path):
+        raise HTTPException(status_code=404, detail="Puzzle harian belum tersedia")
+
+    with open(file_path, "r") as f:
+        data = json.load(f)
+    # kunci jawaban resmi tidak dikirim, solve tetap lewat solver kita
+    data.pop("official_solution", None)
+    return data
+
 @app.post("/api/solve")
 def solve_puzzle(request: SolverRequest):
     my_puzzle = Puzzle()

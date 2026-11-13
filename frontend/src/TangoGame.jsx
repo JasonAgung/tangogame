@@ -71,6 +71,10 @@ export default function GameUI() {
   const [showRulesModal, setShowRulesModal] = useState(false);
   const [showModeGuide, setShowModeGuide] = useState(false);
 
+  // State puzzle harian (Today's Tango Challenge)
+  const [daily, setDaily] = useState(null);
+  const [isDailyActive, setIsDailyActive] = useState(false);
+
   useEffect(function() {
     start();
   }, []);
@@ -137,9 +141,11 @@ export default function GameUI() {
     }
   }
 
-  function start() {
+  //kalau puzzle harian ada, langsung dimainkan. kalau ngga, fallback ke easy #1
+  async function start() {
     showStatus("Selamat datang!");
-    onLoadPuzzle("easy", "1");
+    const loaded = await onLoadDaily();
+    if (!loaded) onLoadPuzzle("easy", "1");
   }
 
   function setMode(m) {
@@ -224,6 +230,34 @@ export default function GameUI() {
     return cleanGrid;
   }
 
+  function terapkanPuzzle(data) {
+    setGrid(konversiGrid(data.grid));
+    setGivens(data.givens);
+    setConstraints(data.constraints);
+    setEvaluationMetrics(null);
+    setViolatingCells([]);
+  }
+
+  async function onLoadDaily() {
+    setLoading(true);
+    showStatus("Memuat puzzle hari ini...");
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/daily`);
+      if (!response.ok) throw new Error("Puzzle harian belum tersedia");
+      const data = await response.json();
+      terapkanPuzzle(data);
+      setDaily(data);
+      setIsDailyActive(true);
+      showStatus(`Today's Tango #${data.edition} dimuat.`);
+      return true;
+    } catch {
+      setDaily(null);
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  }
+
   async function onLoadPuzzle(diff, num) {
     setLoading(true);
     showStatus("Menghubungi server...");
@@ -231,11 +265,8 @@ export default function GameUI() {
       const response = await fetch(`${API_BASE_URL}/api/puzzle?difficulty=${diff}&number=${num}`);
       if (!response.ok) throw new Error("Puzzle tidak ditemukan");
       const data = await response.json();
-      setGrid(konversiGrid(data.grid));
-      setGivens(data.givens);
-      setConstraints(data.constraints);
-      setEvaluationMetrics(null);
-      setViolatingCells([]);
+      terapkanPuzzle(data);
+      setIsDailyActive(false);
       showStatus(`Puzzle ${diff} #${num} dimuat.`);
     } catch (error) {
       showStatus("Gagal memuat puzzle.");
@@ -328,6 +359,32 @@ export default function GameUI() {
 
         <div className="bg-slate-800 text-white px-3 sm:px-4 py-1 rounded text-[11px] sm:text-xs uppercase tracking-widest">{statusBar}</div>
       </div>
+
+      {/* Today's Tango Challenge, cuma muncul kalau scraper sudah ambil puzzle */}
+      {daily && (
+        <div className={"mb-4 w-full max-w-sm rounded-lg border-2 px-3 py-2 flex items-center justify-between gap-3 shadow-sm " + (isDailyActive ? "bg-amber-50 border-amber-400" : "bg-white border-slate-800")}>
+          <div className="min-w-0">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-amber-600">Today's Tango Challenge</p>
+            <p className="text-sm font-black text-slate-800 truncate">
+              #{daily.edition}
+              {daily.difficulty && <span className="ml-2 text-[10px] font-bold uppercase bg-slate-800 text-white px-1.5 py-0.5 rounded align-middle">{daily.difficulty}</span>}
+            </p>
+            <p className="text-[10px] text-slate-500">
+              LinkedIn Games ·{" "}
+              <span className="whitespace-nowrap">
+                {new Date(daily.date).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" })}
+              </span>
+            </p>
+          </div>
+          {isDailyActive ? (
+            <span className="shrink-0 text-[10px] font-bold uppercase text-amber-700 bg-amber-100 border border-amber-300 px-2 py-1 rounded">Sedang dimainkan</span>
+          ) : (
+            <button onClick={onLoadDaily} disabled={loading} className="shrink-0 bg-amber-500 hover:bg-amber-600 text-white font-bold px-3 py-2 rounded-lg text-xs transition-all shadow-[0_4px_0_0_rgba(180,83,9,1)] active:shadow-none active:translate-y-1 disabled:opacity-50">
+              MAINKAN
+            </button>
+          )}
+        </div>
+      )}
       <div className="flex items-center gap-2 mb-4">
         <div className="flex gap-2 bg-slate-200 p-1 rounded-lg">
           <button onClick={() => setMode("user")} className={"px-4 py-1 rounded-md text-xs sm:text-sm font-bold " + (mode === "user" ? "bg-white shadow" : "")}>USER</button>
@@ -466,6 +523,12 @@ export default function GameUI() {
           </span>{" "}
           <span className="italic text-slate-400">(inactive)</span>
         </div>
+        {daily && (
+          <div>
+            Today's Tango Challenge: <span className="font-semibold">LinkedIn Games</span>{" "}
+            <span className="italic">(tidak berafiliasi dengan LinkedIn)</span>
+          </div>
+        )}
         <div className="font-medium text-slate-500">
           Made by <span className="font-semibold text-slate-700">Jason Kelvin Agung</span>
         </div>

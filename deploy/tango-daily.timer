@@ -1,0 +1,11 @@
+[Unit]
+Description=Cek puzzle Tango harian tiap jam (scraper skip kalau puzzle hari ini sudah ada)
+
+[Timer]
+OnBootSec=2min
+OnCalendar=*-*-* *:05:00
+RandomizedDelaySec=300
+Persistent=true
+
+[Install]
+WantedBy=timers.target

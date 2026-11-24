@@ -108,7 +108,7 @@ Puzzle Tango harian dari LinkedIn Games ditampilkan di atas papan dan langsung d
 
 - `app/linkedin_daily.py` membuka halaman game LinkedIn (tanpa login) pakai Playwright, mengambil data puzzle, lalu menyimpannya ke `data_puzzle/daily/latest.json` (format sama dengan `data_puzzle/<difficulty>/`).
 - Scraper juga menjalankan solver Backtracking dan mencocokkannya dengan kunci jawaban resmi (`solver_verified`).
-- Dijalankan tiap jam oleh systemd timer. Kalau puzzle hari ini (patokan tengah malam waktu Pacific) sudah ada, scraper langsung skip.
+- Dijalankan systemd timer jam 00:01 & 00:30 waktu Pacific (15:01 & 15:30 WIB, 14:01 & 14:30 WIB saat DST), tepat setelah LinkedIn ganti soal. Kalau soal belum berganti, tidak disimpan dan dicoba lagi di jadwal berikutnya.
 - Endpoint: `GET /api/daily`. Kalau belum ada puzzle harian, frontend fallback ke puzzle Easy #1.
 
 Jalankan manual di lokal (pakai Google Chrome yang terpasang):

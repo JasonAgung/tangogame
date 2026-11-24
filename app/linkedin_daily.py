@@ -193,6 +193,18 @@ def main(argv=None) -> int:
         body = fetch_raw_response()
 
     puzzle = to_app_format(parse_lotka(body))
+
+    # LinkedIn kadang telat ganti soal: jangan simpan soal kemarin sebagai "hari ini",
+    # biar jadwal berikutnya (timer) coba lagi
+    if not args.force and not args.from_file and puzzle["edition"] is not None:
+        try:
+            with open(LATEST_PATH) as f:
+                if json.load(f).get("edition") == puzzle["edition"]:
+                    print(f"LinkedIn belum ganti soal (masih #{puzzle['edition']}), coba lagi di jadwal berikutnya.")
+                    return 0
+        except (OSError, ValueError):
+            pass
+
     puzzle["fetched_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
     puzzle["date"] = _reset_date(datetime.now(timezone.utc))
     puzzle["solver_verified"] = solver_matches_official(puzzle)

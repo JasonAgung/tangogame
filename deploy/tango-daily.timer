@@ -2,10 +2,11 @@
 Description=Ambil puzzle Tango harian tepat setelah LinkedIn ganti soal (tengah malam waktu Pacific)
 
 [Timer]
-# 00:01 PT = 15:01 WIB (musim dingin) / 14:01 WIB (musim panas), DST diurus systemd
-OnCalendar=*-*-* 00:01:00 America/Los_Angeles
-# percobaan ulang kalau yang pertama gagal / LinkedIn telat ganti soal
-OnCalendar=*-*-* 00:30:00 America/Los_Angeles
+# 00:01-00:59 PT tiap 2 menit = 15:01-15:59 WIB (14:01-14:59 WIB saat DST, diurus systemd).
+# Setelah puzzle didapat, sisa jadwal langsung skip tanpa membuka LinkedIn.
+OnCalendar=*-*-* 00:01/2:00 America/Los_Angeles
+# cadangan tiap jam kalau satu jam pertama gagal semua
+OnCalendar=*-*-* 01..23:01:00 America/Los_Angeles
 OnBootSec=2min
 Persistent=true
 
